@@ -98,9 +98,11 @@ export const site = {
   strapline: 'Property Maintenance',
   descriptor: 'Professional Property Maintenance Services',
 
-  // NOTE: the old site showed 01932 231 122 in the header but linked
-  // tel:01372 231 122 in the footer. 01932 is the Walton-on-Thames / Hersham
-  // code, so that is used here. Confirm before going live.
+  // Confirmed correct. (The previous site was inconsistent: it displayed this
+  // number in the header but linked a 01372 one in the footer. 01932 is the
+  // Walton-on-Thames / Hersham code and is the right one.)
+  // `display` is what appears on the page; `href` is the E.164 form used by
+  // every tel: link and must be kept in step with it.
   phone: {
     display: '01932 231 122',
     href: 'tel:+441932231122',

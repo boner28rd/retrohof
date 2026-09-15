@@ -20,13 +20,16 @@ These are deliberate gaps, not oversights. Work through them first.
 |---|------|-------|
 | 1 | **Project case studies are placeholders.** They describe the *kind* of work RetroHof does but are not records of real jobs. Replace each with a real project — real scope, duration and photographs — or remove `/projects` from the nav until you have some. | `src/data/projects.mjs` |
 | 2 | **Testimonials are placeholders.** Replace with real, attributable client feedback (with permission), or delete the array and the section disappears. Do not invent names. | `src/data/content.mjs` |
-| 3 | **Confirm the phone number.** The old site displayed `01932 231 122` in the header but linked `tel:01372 231 122` in the footer. `01932` (Walton-on-Thames / Hersham) is used throughout here. | `src/data/site.mjs` |
-| 4 | **Social links were removed.** The old site linked to `facebook.com/windsorshortstays`, `instagram.com/sentinel.living.sa` and other unrelated brands. Add RetroHof's own profiles to `site.social` or leave the array empty. | `src/data/site.mjs` |
-| 5 | **Wire up the contact form.** Set `site.formEndpoint` to a Formspree / Basin / Netlify Forms endpoint. Until then the form validates client-side and hands off to the visitor's email client. | `src/data/site.mjs` |
-| 6 | **Have the legal pages reviewed.** The terms, privacy policy and acceptable use policy are an accurate, sensible starting point for a UK maintenance company — they are not legally vetted. | `src/pages/legal.mjs` |
-| 7 | **Add the company number** if RetroHof Ltd is registered; it then appears in the footer. | `src/data/site.mjs` |
-| 8 | **Verify the claims.** Figures in the stat band ("1,200+ jobs a year") and the credentials list (Gas Safe, registered electricians, waste carrier licence, DBS) must be true before publication. | `src/data/content.mjs` |
-| 9 | **Confirm the coverage tiers.** `coverage` lists four regions ordered by distance, with response expectations that differ between them. All four regions now list towns (108 in total). Outside the Surrey home patch these are the principal towns of the counties you named, **not a confirmed attendance list** — strike any RetroHof does not actually serve. Named towns help local search, but an unserved town on the list is worse than a short list. | `src/data/site.mjs` |
+| 3 | **Social links were removed.** The old site linked to `facebook.com/windsorshortstays`, `instagram.com/sentinel.living.sa` and other unrelated brands. Add RetroHof's own profiles to `site.social` or leave the array empty. | `src/data/site.mjs` |
+| 4 | **Wire up the contact form.** Set `site.formEndpoint` to a Formspree / Basin / Netlify Forms endpoint. Until then the form validates client-side and hands off to the visitor's email client. | `src/data/site.mjs` |
+| 5 | **Have the legal pages reviewed.** The terms, privacy policy and acceptable use policy are an accurate, sensible starting point for a UK maintenance company — they are not legally vetted. | `src/pages/legal.mjs` |
+| 6 | **Add the company number** if RetroHof Ltd is registered; it then appears in the footer. | `src/data/site.mjs` |
+| 7 | **Verify the claims.** Figures in the stat band ("1,200+ jobs a year") and the credentials list (Gas Safe, registered electricians, waste carrier licence, DBS) must be true before publication. | `src/data/content.mjs` |
+| 8 | **Confirm the coverage tiers.** `coverage` lists four regions ordered by distance, with response expectations that differ between them. All four regions now list towns (108 in total). Outside the Surrey home patch these are the principal towns of the counties you named, **not a confirmed attendance list** — strike any RetroHof does not actually serve. Named towns help local search, but an unserved town on the list is worse than a short list. | `src/data/site.mjs` |
+
+**Settled — no longer in question:** the phone number is **01932 231 122**
+(`tel:+441932231122`). The previous site was inconsistent about this, showing
+`01932` in the header and linking `01372` in the footer; this one is not.
 
 `node tools/build.mjs` prints a warning listing any placeholder content still
 present.
