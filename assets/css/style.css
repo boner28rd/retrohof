@@ -266,6 +266,10 @@ a.topbar__item:hover { color: #fff; }
 .sec-head--left { max-width: 42rem; }
 .sec-head__title { font-size: clamp(1.75rem, 1.1rem + 2.1vw, 2.85rem); margin-bottom: .5rem; }
 .sec-head__lead { font-size: clamp(1.03rem, 1rem + .3vw, 1.175rem); color: var(--muted); margin: 0; }
+/* Inside a .sec-head the lead is the last element, so it needs no bottom
+   margin. Used as a standfirst above body copy it does. Adjacent margins
+   collapse, so this is a no-op where the next element already has one. */
+.sec-head__lead:not(:last-child) { margin-bottom: 1.1rem; }
 .sec--dark .sec-head__lead { color: #9aa6b2; }
 
 .lead { font-size: 1.1rem; color: var(--muted); }
