@@ -5,7 +5,7 @@
 // writes plain HTML to the repository root so the site can be served by GitHub
 // Pages (or anything else) with no build step on the host.
 // ---------------------------------------------------------------------------
-import { mkdir, writeFile, readdir, rm, stat } from 'node:fs/promises';
+import { mkdir, writeFile, readFile, readdir, rm, stat } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
@@ -182,6 +182,10 @@ async function main() {
   await write('robots.txt', robots());
   await write('site.webmanifest', webmanifest());
   await write('.nojekyll', '');
+
+  // IIS config for the retrohof.co.uk host. Harmless on GitHub Pages, which
+  // ignores it, but required on IIS — see the comments inside the file.
+  await write('web.config', await readFile(join(ROOT, 'src', 'web.config'), 'utf8'));
 
   const linkProblems = checkLinks(htmlByFile);
   const imageProblems = await checkImages(htmlByFile);

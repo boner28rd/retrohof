@@ -113,14 +113,72 @@ Colours and logos were kept deliberately; everything else is new.
 
 ## Deployment
 
-The repo root *is* the site, so any of these work:
+### retrohof.co.uk (SmarterASP.NET, IIS) — the live host
+
+Published with **Web Deploy** (`msdeploy`), using the MSDeploy entry from the
+hosting publish profile.
+
+```bash
+node tools/build.mjs
+node tools/deploy.mjs --whatif    # show what would change, change nothing
+node tools/deploy.mjs             # publish (adds and updates only)
+node tools/deploy.mjs --clean     # also delete remote files not in the build
+```
+
+The password is read from `RETROHOF_WEBDEPLOY_PASSWORD`. Set it for the
+terminal session only — do not put it in a file, and do not commit it:
+
+```bash
+export RETROHOF_WEBDEPLOY_PASSWORD='…'        # Git Bash
+```
+```powershell
+$env:RETROHOF_WEBDEPLOY_PASSWORD = '…'        # PowerShell
+```
+
+`msdeploy` cannot take a password on stdin, so it goes in as a provider
+setting — briefly visible in this machine's own process list while the command
+runs, exactly as a Visual Studio publish would be. It is never written to
+disk, never logged, and is redacted from error output.
+
+Connection details are hard-coded at the top of `tools/deploy.mjs`, taken from
+the publish profile: endpoint
+`https://win6046.site4now.net:8172/msdeploy.axd?site=boner28-003-site5`,
+site `boner28-003-site5`, user `boner28-003`. `-allowUntrusted` is set because
+shared-hosting certificates rarely match the hostname.
+
+**How the payload is built.** The script first copies the publishable files
+into `.deploy/` (gitignored) and syncs *that*, so `src/`, `tools/`, `.claude/`,
+`.git/`, `README.md` and `package.json` cannot reach the server even by
+accident. Run any command above and inspect `.deploy/` — it is exactly what
+would be published, and it is staged before the password is even checked.
+
+**Deleting stale files.** The default is add/update only. The server still
+holds the previous site (the old Canvas template: `canvas/`, `demos/`,
+`images/`, its own `style.css`), which will sit there unused. `--clean` removes
+anything not in the current build — run `--whatif --clean` first and read the
+list before committing to it.
+
+**`web.config` matters on this host.** IIS will not serve a file type it has
+no MIME mapping for, and `.webmanifest` is not mapped by default — without it
+the site manifest 404s. It also wires up the custom 404 page, caching headers
+and compression. It is generated from `src/web.config`; edit that, not the
+copy at the root.
+
+**Canonical redirects are shipped disabled.** The pages carry
+`https://www.retrohof.co.uk/...` canonicals, but the host answers on four URL
+variants. `src/web.config` contains rewrite rules to force https and www —
+commented out, because they need the IIS URL Rewrite module and a missing
+module turns a `<rewrite>` section into a site-wide HTTP 500. Uncomment,
+upload, and load the site; if you get a 500, re-comment and it recovers
+immediately.
+
+### Other hosts
 
 - **GitHub Pages** — Settings → Pages → deploy from `main`, folder `/ (root)`.
-  A `.nojekyll` file is generated so nothing is filtered out.
+  A `.nojekyll` file is generated so nothing is filtered out. Currently live
+  at <https://boner28rd.github.io/retrohof/> as a preview.
 - **Netlify / Cloudflare Pages / Vercel** — publish directory `.`, no build
   command (or `node tools/build.mjs` if you would rather it rebuilt on push).
-- **Traditional hosting** — upload the repo contents minus `src/`, `tools/` and
-  `.claude/`.
 
 Set the real domain in `site.baseUrl` (`src/data/site.mjs`) before building —
 it drives the canonical URLs, Open Graph tags, `sitemap.xml` and `robots.txt`.

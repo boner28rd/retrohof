@@ -12,7 +12,11 @@
     "serve": "node tools/serve.mjs",
     "start": "node tools/build.mjs && node tools/serve.mjs",
     "images": "node tools/fetch-images.mjs",
-    "images:force": "node tools/fetch-images.mjs --force"
+    "images:force": "node tools/fetch-images.mjs --force",
+    "check:layout": "node tools/check-layout.mjs",
+    "deploy:whatif": "node tools/build.mjs && node tools/deploy.mjs --whatif",
+    "deploy": "node tools/build.mjs && node tools/deploy.mjs",
+    "deploy:clean": "node tools/build.mjs && node tools/deploy.mjs --clean"
   },
   "license": "UNLICENSED"
 }
