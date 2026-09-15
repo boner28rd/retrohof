@@ -2,18 +2,19 @@
   "name": "RetroHof Ltd — Professional Property Maintenance Services",
   "short_name": "RetroHof",
   "description": "Multi-trade property maintenance across Surrey.",
-  "start_url": "/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#d22630",
   "icons": [
     {
-      "src": "/assets/img/logo/logo.png",
+      "src": "assets/img/logo/logo.png",
       "sizes": "76x100",
       "type": "image/png"
     },
     {
-      "src": "/assets/img/logo/logo-full.png",
+      "src": "assets/img/logo/logo-full.png",
       "sizes": "2924x1462",
       "type": "image/png",
       "purpose": "any"

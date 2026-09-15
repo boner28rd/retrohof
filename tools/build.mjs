@@ -82,13 +82,16 @@ const webmanifest = () =>
       name: `${site.legalName} — ${site.descriptor}`,
       short_name: site.name,
       description: 'Multi-trade property maintenance across Surrey.',
-      start_url: '/',
+      // Relative, so the manifest is correct whether the site is served from a
+      // domain root (retrohof.co.uk) or a subpath (GitHub Pages project sites).
+      start_url: './',
+      scope: './',
       display: 'standalone',
       background_color: '#ffffff',
       theme_color: '#d22630',
       icons: [
-        { src: '/assets/img/logo/logo.png', sizes: '76x100', type: 'image/png' },
-        { src: '/assets/img/logo/logo-full.png', sizes: '2924x1462', type: 'image/png', purpose: 'any' },
+        { src: 'assets/img/logo/logo.png', sizes: '76x100', type: 'image/png' },
+        { src: 'assets/img/logo/logo-full.png', sizes: '2924x1462', type: 'image/png', purpose: 'any' },
       ],
     },
     null,
