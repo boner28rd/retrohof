@@ -54,6 +54,11 @@ export default {
     'Examples of property maintenance and refurbishment work carried out by RetroHof across Surrey — kitchens, bathrooms, void turnarounds, roofline replacement, communal areas and commercial units.',
   ogImage: '/assets/img/banner/projects.jpg',
   breadcrumbs: [{ label: 'Projects', href: '/projects' }],
+  // Kept out of search results while the case studies below are still
+  // placeholders. Remove this line once they are replaced with real jobs.
+  // `noindex, follow` rather than a robots.txt block: crawlers still need to
+  // fetch the page to see the directive, and the outbound links still count.
+  noindex: true,
   body: [
     banner(d, {
       eyebrow: 'Our work',
