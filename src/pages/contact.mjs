@@ -131,7 +131,7 @@ export default {
         .join('')}
     </div>
 
-    <div class="cols cols--2 cols--7-5" style="align-items:start">
+    <div class="cols cols--2 cols--7-5">
       <div>
         ${form()}
       </div>

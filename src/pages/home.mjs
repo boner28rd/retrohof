@@ -121,7 +121,7 @@ function intro() {
         <a class="btn btn--ghost" href="${rel(d, '/about')}">About the company</a>
       </div>
     </div>
-    <div class="cols__media cols__media--stack reveal">
+    <div class="cols__media cols__media--stack cols__media--fill reveal">
       <img src="${rel(d, '/assets/img/about/onsite.jpg')}" alt="RetroHof tradesperson working on site" width="1400" height="1000" loading="lazy">
       <img src="${rel(d, '/assets/img/about/tools.jpg')}" alt="Organised tool kit ready for a maintenance visit" width="1400" height="1000" loading="lazy">
       <img src="${rel(d, '/assets/img/misc/trust.jpg')}" alt="Handshake at the end of a completed job" width="1200" height="800" loading="lazy">
@@ -151,7 +151,7 @@ function whySection() {
   return `
 <section class="sec sec--dark">
   <div class="wrap cols cols--2 cols--5-7 cols--media-first">
-    <div class="cols__media reveal">
+    <div class="cols__media cols__media--fill reveal">
       <img src="${rel(d, '/assets/img/about/survey.jpg')}" alt="Supervisor carrying out a property condition survey" width="1400" height="1000" loading="lazy">
       <div class="badge-float"><strong>12 mth</strong><span>workmanship guarantee on every job we complete</span></div>
     </div>
@@ -278,7 +278,7 @@ function areasSection() {
         <a class="btn btn--outline" href="${rel(d, '/areas')}">Check your area</a>
       </div>
     </div>
-    <div class="cols__media reveal">
+    <div class="cols__media cols__media--fill reveal">
       <img src="${rel(d, '/assets/img/projects/exterior.jpg')}" alt="Detached property after exterior maintenance work" width="1200" height="900" loading="lazy">
     </div>
   </div>

@@ -37,7 +37,7 @@ export default {
         <a class="btn btn--ghost" href="${site.phone.href}">${icon('phone', { size: 18 })}${site.phone.display}</a>
       </div>
     </div>
-    <div class="cols__media reveal">
+    <div class="cols__media cols__media--fill reveal">
       <img src="${rel(d, '/assets/img/projects/exterior.jpg')}" alt="Property maintained by RetroHof" width="960" height="720" loading="lazy">
     </div>
   </div>

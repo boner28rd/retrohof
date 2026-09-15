@@ -38,7 +38,11 @@ async function locate(urlPath) {
   const s = await exists(p);
   if (s && s.isDirectory()) {
     const idx = join(p, 'index.html');
-    return (await exists(idx)) ? idx : null;
+    if (await exists(idx)) return idx;
+    // A directory can shadow a sibling page: /services is both the folder
+    // holding the detail pages and services.html. Prefer the page.
+    if (await exists(p + '.html')) return p + '.html';
+    return null;
   }
   if (s) return p;
 

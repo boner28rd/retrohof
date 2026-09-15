@@ -128,7 +128,7 @@ export default {
         const flip = i % 2 === 1;
         return `
 <section class="sec${i % 2 === 0 ? ' sec--tint' : ''}" id="${esc(s.slug)}">
-  <div class="wrap cols cols--2 ${flip ? 'cols--5-7 cols--media-first' : 'cols--7-5'} cols--top">
+  <div class="wrap cols cols--2 ${flip ? 'cols--5-7 cols--media-first' : 'cols--7-5'}">
     <div>
       <p class="eyebrow">${esc(s.title)}</p>
       <h2 class="sec-head__title">${esc(dt.headline)}</h2>
@@ -140,7 +140,7 @@ export default {
         <a class="btn btn--ghost" href="${rel(d, '/services')}">See services</a>
       </div>
     </div>
-    <div class="cols__media cols__media--tall reveal">
+    <div class="cols__media cols__media--fill reveal">
       <img src="${rel(d, s.image)}" alt="${esc(s.title)} — example of RetroHof work" width="960" height="720" loading="lazy">
     </div>
   </div>

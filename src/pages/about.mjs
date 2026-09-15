@@ -47,7 +47,7 @@ export default {
         <a class="btn btn--ghost" href="${rel(d, '/services')}">What we do</a>
       </div>
     </div>
-    <div class="cols__media cols__media--stack reveal">
+    <div class="cols__media cols__media--stack cols__media--fill reveal">
       <img src="${rel(d, '/assets/img/about/team.jpg')}" alt="RetroHof team reviewing works on site" width="1400" height="1000" loading="lazy">
       <img src="${rel(d, '/assets/img/about/onsite.jpg')}" alt="Carpenter cutting timber during a fit-out" width="1400" height="1000" loading="lazy">
       <img src="${rel(d, '/assets/img/about/tools.jpg')}" alt="Tools laid out ready for a maintenance visit" width="1400" height="1000" loading="lazy">
@@ -80,7 +80,7 @@ export default {
     `
 <section class="sec sec--dark">
   <div class="wrap cols cols--2 cols--5-7 cols--media-first">
-    <div class="cols__media reveal">
+    <div class="cols__media cols__media--fill reveal">
       <img src="${rel(d, '/assets/img/about/survey.jpg')}" alt="Property condition survey being carried out" width="1400" height="1000" loading="lazy">
     </div>
     <div>
@@ -108,7 +108,7 @@ export default {
         <a class="btn btn--outline" href="${rel(d, '/projects')}">See the work</a>
       </div>
     </div>
-    <div class="cols__media reveal">
+    <div class="cols__media cols__media--fill reveal">
       <img src="${rel(d, '/assets/img/services/refurbishment.jpg')}" alt="Refurbished interior after completion" width="1200" height="900" loading="lazy">
     </div>
   </div>

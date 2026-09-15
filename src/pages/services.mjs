@@ -54,7 +54,7 @@ const hub = () => {
         <a class="btn btn--primary" href="${rel(d, '/contact')}">Discuss a project</a>
       </div>
     </div>
-    <div class="cols__media reveal">
+    <div class="cols__media cols__media--fill reveal">
       <img src="${rel(d, '/assets/img/misc/quote.jpg')}" alt="Tradesperson fitting new joinery during a managed refurbishment" width="1400" height="1000" loading="lazy">
     </div>
   </div>
