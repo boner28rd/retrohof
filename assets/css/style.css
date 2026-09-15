@@ -720,9 +720,22 @@ input[aria-invalid='true'], textarea[aria-invalid='true'], select[aria-invalid='
 
 /* --------------------------------------------------------------- footer -- */
 .foot { background: var(--dark); color: #98a4b0; font-size: .9375rem; }
-.foot__grid { display: grid; gap: clamp(2rem, 4vw, 3rem); padding-block: clamp(3rem, 6vw, 4.5rem); grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
-.foot__col--brand { grid-column: span 2; min-width: 0; }
-@media (max-width: 720px) { .foot__col--brand { grid-column: span 1; } }
+/* Explicit tracks rather than auto-fit: auto-fit only fitted four 210px
+   columns at this container width, and the brand column spanning two of them
+   pushed Legal onto a second row. */
+.foot__grid { display: grid; gap: clamp(2rem, 4vw, 3rem); padding-block: clamp(3rem, 6vw, 4.5rem); grid-template-columns: 1fr; }
+.foot__col { min-width: 0; }
+.foot__col--brand { min-width: 0; }
+@media (min-width: 620px) {
+  .foot__grid { grid-template-columns: repeat(3, 1fr); }
+  .foot__col--brand { grid-column: 1 / -1; }
+}
+@media (min-width: 1000px) {
+  /* Brand keeps a wider column, and Services / Company / Legal join it on the
+     same row. */
+  .foot__grid { grid-template-columns: 1.6fr 1fr 1fr 1fr; }
+  .foot__col--brand { grid-column: auto; }
+}
 .foot__logo { width: 190px; margin-bottom: 1.1rem; }
 .foot__blurb { max-width: 32rem; line-height: 1.7; }
 .foot__head { font-size: .8125rem; letter-spacing: .14em; text-transform: uppercase; color: #fff; margin-bottom: 1.1rem; }
