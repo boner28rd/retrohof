@@ -183,12 +183,27 @@ immediately.
 Set the real domain in `site.baseUrl` (`src/data/site.mjs`) before building —
 it drives the canonical URLs, Open Graph tags, `sitemap.xml` and `robots.txt`.
 
-### Pretty URLs
+### URL structure
 
-Pages are generated as `/services.html`, `/about.html` and so on, and links
-point at those files, so the site works from the filesystem and on any host.
-If you would prefer extensionless URLs, add a rewrite rule at the host
-(`/$1` → `/$1.html`); the local preview server already resolves both.
+Pages are published as a directory holding an `index.html`:
+
+| Page | File | Served at |
+|---|---|---|
+| Home | `index.html` | `/` |
+| About | `about/index.html` | `/about/` |
+| A service | `services/roofing-guttering/index.html` | `/services/roofing-guttering/` |
+| 404 | `404.html` | (IIS `httpErrors` target) |
+
+This is deliberate, and worth not "simplifying" later. The previous site
+served extensionless URLs — `/about` returned 200 and `/about.html` returned
+404 — so those are what search engines have indexed. With the directory form,
+`/about/` is served by the default document and IIS issues its own 301 from
+`/about` to `/about/`, so every existing link keeps working **without needing
+the URL Rewrite module**. Flattening these back to `about.html` would 404
+every indexed URL.
+
+Canonical tags, the sitemap and schema.org URLs all carry the trailing slash
+to match (`https://retrohof.co.uk/about/`).
 
 ---
 

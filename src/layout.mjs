@@ -5,17 +5,25 @@ import { icon } from './icons.mjs';
 export const esc = (s) =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+// Pages are published as directories holding an index.html (/about/index.html),
+// so a link to a page is a directory path with a trailing slash. IIS serves
+// /about/ from the default document and 301s /about -> /about/ by itself,
+// which keeps the extensionless URLs the previous site had indexed working —
+// without needing the URL Rewrite module.
 const rel = (depth, href) => {
   if (/^(https?:|mailto:|tel:|#)/.test(href)) return href;
   const up = depth > 0 ? '../'.repeat(depth) : './';
-  if (href === '/') return depth > 0 ? up + 'index.html' : 'index.html';
   const clean = href.replace(/^\//, '');
   const [path, hash = ''] = clean.split('#');
-  // Only pretty page paths get an .html extension; assets already have one.
+  // Assets keep their exact path; pages become directories.
   const hasExt = /\.[a-z0-9]{2,12}$/i.test(path);
-  const file = hasExt ? path : `${path}.html`;
-  return up + file + (hash ? `#${hash}` : '');
+  const target = !path ? '' : hasExt ? path : `${path}/`;
+  return up + target + (hash ? `#${hash}` : '');
 };
+
+/** Absolute URL for a page, with the trailing slash the directory form needs. */
+export const absUrl = (url) =>
+  site.baseUrl + (url === '/' ? '/' : /\.[a-z0-9]{2,12}$/i.test(url) ? url : `${url}/`);
 
 function topbar(depth) {
   return `
@@ -174,7 +182,7 @@ function jsonLd(depth, page) {
     ],
     makesOffer: services.map((s) => ({
       '@type': 'Offer',
-      itemOffered: { '@type': 'Service', name: s.title, url: `${site.baseUrl}/services/${s.slug}` },
+      itemOffered: { '@type': 'Service', name: s.title, url: absUrl(`/services/${s.slug}`) },
     })),
   };
 
@@ -188,7 +196,7 @@ function jsonLd(depth, page) {
         '@type': 'ListItem',
         position: i + 1,
         name: c.label,
-        item: site.baseUrl + (c.href === '/' ? '/' : c.href),
+        item: absUrl(c.href),
       })),
     });
   }
@@ -217,7 +225,7 @@ function jsonLd(depth, page) {
  */
 export function render(page) {
   const depth = page.depth ?? 0;
-  const canonical = site.baseUrl + (page.url === '/' ? '/' : page.url);
+  const canonical = absUrl(page.url);
   const ogImage = site.baseUrl + (page.ogImage || '/assets/img/hero/hero-1.jpg');
 
   return `<!doctype html>

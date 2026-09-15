@@ -5,7 +5,7 @@ import {
   banner, sectionHead, ctaBand, statBand, processSteps, credentialGrid,
 } from '../components.mjs';
 
-const d = 0;
+const d = 1;
 
 const values = [
   ['clock', 'Turn up when we said', 'If we are going to be late, you hear it from us before you have to ask. Appointment windows, not "sometime Tuesday".'],
@@ -16,7 +16,7 @@ const values = [
 
 export default {
   url: '/about',
-  file: 'about.html',
+  file: 'about/index.html',
   depth: d,
   title: `About RetroHof | Property Maintenance in ${site.address.region}`,
   description:

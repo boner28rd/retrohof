@@ -4,7 +4,7 @@ import { icon } from '../icons.mjs';
 import { esc, rel } from '../layout.mjs';
 import { banner, sectionHead, ctaBand } from '../components.mjs';
 
-const d = 0;
+const d = 1;
 
 // `headline` is the section heading — keep it short. The longer sentence that
 // used to be the heading now runs as `lead` underneath it, and each section
@@ -84,7 +84,7 @@ const detail = {
 
 export default {
   url: '/sectors',
-  file: 'sectors.html',
+  file: 'sectors/index.html',
   depth: d,
   title: `Who We Work With | ${site.legalName}`,
   description:

@@ -3,13 +3,13 @@ import { faqGroups } from '../data/content.mjs';
 import { esc, rel } from '../layout.mjs';
 import { banner, sectionHead, ctaBand, faqList } from '../components.mjs';
 
-const d = 0;
+const d = 1;
 
 const all = faqGroups.flatMap((g) => g.items);
 
 export default {
   url: '/faq',
-  file: 'faq.html',
+  file: 'faq/index.html',
   depth: d,
   title: `Frequently Asked Questions | ${site.legalName}`,
   description:

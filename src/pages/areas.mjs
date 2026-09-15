@@ -4,11 +4,11 @@ import { icon } from '../icons.mjs';
 import { esc, rel } from '../layout.mjs';
 import { banner, sectionHead, ctaBand } from '../components.mjs';
 
-const d = 0;
+const d = 1;
 
 export default {
   url: '/areas',
-  file: 'areas.html',
+  file: 'areas/index.html',
   depth: d,
   title: `Areas We Cover | Surrey to Devon, Kent & Hertfordshire | ${site.legalName}`,
   description:

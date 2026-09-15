@@ -112,7 +112,11 @@ export const site = {
   hoursShort: 'Mon–Sat 8–6',
   emergencyNote: '24/7 emergency cover for managed properties',
 
-  baseUrl: 'https://www.retrohof.co.uk',
+  // Apex, not www. The existing live site declares
+  // <link rel="canonical" href="https://retrohof.co.uk"> and serves both
+  // hostnames without redirecting, so the apex is what is already indexed.
+  // Drives canonical tags, Open Graph URLs, sitemap.xml and robots.txt.
+  baseUrl: 'https://retrohof.co.uk',
 
   address: {
     locality: 'Hersham',

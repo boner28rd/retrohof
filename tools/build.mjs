@@ -12,7 +12,7 @@ import { pathToFileURL } from 'node:url';
 import { site } from '../src/data/site.mjs';
 import { projects } from '../src/data/projects.mjs';
 import { testimonials } from '../src/data/content.mjs';
-import { render } from '../src/layout.mjs';
+import { render, absUrl } from '../src/layout.mjs';
 
 import home from '../src/pages/home.mjs';
 import servicePages from '../src/pages/services.mjs';
@@ -56,7 +56,7 @@ function sitemap() {
     .filter((p) => !p.noindex)
     .map(
       (p) => `  <url>
-    <loc>${site.baseUrl}${p.url === '/' ? '/' : p.url}</loc>
+    <loc>${absUrl(p.url)}</loc>
     <lastmod>${today}</lastmod>
     <priority>${priority(p.url)}</priority>
   </url>`,
@@ -101,12 +101,17 @@ const webmanifest = () =>
 /* --------------------------------------------------------------- build -- */
 
 async function cleanGenerated() {
-  // Remove previously generated HTML so renamed pages do not linger.
+  // Remove previously generated output so renamed pages do not linger. Pages
+  // are published as directories (about/index.html), so the directories this
+  // build owns are derived from the page list rather than hard-coded.
   const entries = await readdir(ROOT, { withFileTypes: true });
   for (const e of entries) {
     if (e.isFile() && e.name.endsWith('.html')) await rm(join(ROOT, e.name), { force: true });
   }
-  await rm(join(ROOT, 'services'), { recursive: true, force: true });
+  const owned = new Set(
+    pages.map((p) => p.file.split('/')[0]).filter((seg) => !seg.endsWith('.html')),
+  );
+  for (const dir of owned) await rm(join(ROOT, dir), { recursive: true, force: true });
 }
 
 async function write(relPath, contents) {
@@ -124,8 +129,12 @@ function checkLinks(htmlByFile) {
     const hrefs = [...html.matchAll(/href="([^"]+)"/g)].map((m) => m[1]);
     for (const href of hrefs) {
       if (/^(https?:|mailto:|tel:|#|data:)/.test(href)) continue;
-      const [path] = href.split('#');
-      if (!path || !path.endsWith('.html')) continue;
+      let [path] = href.split('#');
+      if (!path) continue;
+      // Page links are directory paths ("../about/"); resolve them to the
+      // index.html the server would actually return.
+      if (path.endsWith('/')) path += 'index.html';
+      if (!path.endsWith('.html')) continue;
       // resolve relative to this file's directory
       const parts = (dir ? dir.split('/') : []).concat(path.split('/'));
       const stack = [];

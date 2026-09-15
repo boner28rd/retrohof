@@ -5,7 +5,7 @@ import { icon } from '../icons.mjs';
 import { esc, rel } from '../layout.mjs';
 import { banner, sectionHead, ctaBand } from '../components.mjs';
 
-const d = 0;
+const d = 1;
 
 const catLabel = (id) => (projectCategories.find((c) => c.id === id) || { label: id }).label;
 
@@ -47,7 +47,7 @@ function card(p, i) {
 
 export default {
   url: '/projects',
-  file: 'projects.html',
+  file: 'projects/index.html',
   depth: d,
   title: `Projects & Case Studies | ${site.legalName}`,
   description:

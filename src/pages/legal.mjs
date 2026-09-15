@@ -10,7 +10,7 @@ import { site } from '../data/site.mjs';
 import { esc, rel } from '../layout.mjs';
 import { banner } from '../components.mjs';
 
-const d = 0;
+const d = 1;
 const UPDATED = 'September 2026';
 
 const page = (slug, file, title, heading, lead, description, bodyHtml) => ({
@@ -44,7 +44,7 @@ const page = (slug, file, title, heading, lead, description, bodyHtml) => ({
 /* ------------------------------------------------------------- terms -- */
 const terms = page(
   'terms',
-  'terms.html',
+  'terms/index.html',
   'Terms & Conditions',
   'Terms and conditions',
   'The terms on which RetroHof Ltd provides property maintenance services and on which this website is made available.',
@@ -118,7 +118,7 @@ const terms = page(
 /* ----------------------------------------------------------- privacy -- */
 const privacy = page(
   'privacy',
-  'privacy.html',
+  'privacy/index.html',
   'Privacy Policy',
   'Privacy policy',
   'What personal data RetroHof Ltd collects through this website and in the course of carrying out work, why we hold it, and your rights over it.',
@@ -203,7 +203,7 @@ const privacy = page(
 /* ----------------------------------------------------- acceptable use -- */
 const acceptableUse = page(
   'acceptable-use',
-  'acceptable-use.html',
+  'acceptable-use/index.html',
   'Acceptable Use Policy',
   'Acceptable use policy',
   'The rules for using the RetroHof website and for material you send to us through it.',

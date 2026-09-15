@@ -4,7 +4,7 @@ import { icon } from '../icons.mjs';
 import { esc, rel } from '../layout.mjs';
 import { banner, sectionHead, ctaBand } from '../components.mjs';
 
-const d = 0;
+const d = 1;
 
 const contactCards = [
   ['phone', 'Call us', `<a href="${site.phone.href}">${site.phone.display}</a>`, 'Fastest for anything urgent'],
@@ -98,7 +98,7 @@ function form() {
 
 export default {
   url: '/contact',
-  file: 'contact.html',
+  file: 'contact/index.html',
   depth: d,
   title: `Contact RetroHof | Free Quotes, Surrey & Southern England`,
   description: `Contact RetroHof for property maintenance across southern England. Call ${site.phone.display}, email ${site.email}, or send an enquiry for a free, no-obligation quotation.`,

@@ -7,10 +7,10 @@ import { banner, sectionHead, serviceGrid, ctaBand, processSteps, faqList } from
 
 /* ----------------------------------------------------------- hub page -- */
 const hub = () => {
-  const d = 0;
+  const d = 1;
   return {
     url: '/services',
-    file: 'services.html',
+    file: 'services/index.html',
     depth: d,
     title: `Property Maintenance Services | ${site.regionPhraseTitle} | ${site.legalName}`,
     description:
@@ -71,7 +71,7 @@ const hub = () => {
 
 /* -------------------------------------------------------- detail pages -- */
 function detail(s) {
-  const d = 1;
+  const d = 2;
   const related = projects.filter((p) => p.services.includes(s.slug)).slice(0, 3);
   const others = services.filter((x) => x.slug !== s.slug);
 
@@ -135,7 +135,7 @@ function detail(s) {
 
   return {
     url: `/services/${s.slug}`,
-    file: `services/${s.slug}.html`,
+    file: `services/${s.slug}/index.html`,
     depth: d,
     title: `${s.title} | ${site.regionPhraseTitle} | ${site.legalName}`,
     description: `${s.lead} Fixed prices, fully insured, 12-month workmanship guarantee. Covering ${site.address.region} and across ${site.regionPhrase}.`,
