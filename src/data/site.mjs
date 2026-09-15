@@ -33,7 +33,22 @@ export const coverage = [
     title: 'North to Hertfordshire',
     note: 'Up through west London and the M25 corridor, as far north as Welwyn.',
     counties: ['Middlesex', 'Buckinghamshire', 'Berkshire', 'Hertfordshire'],
-    places: ['Welwyn', 'Welwyn Garden City'],
+    // Ordered outward from the Hersham base. Stops at Welwyn, the stated
+    // northern limit — nothing beyond it (Stevenage, Milton Keynes) is listed.
+    places: [
+      // West London & Middlesex
+      'Hounslow', 'Uxbridge', 'Harrow',
+      // Berkshire
+      'Windsor', 'Slough', 'Maidenhead', 'Ascot', 'Bracknell', 'Wokingham',
+      'Reading',
+      // Buckinghamshire
+      'Gerrards Cross', 'Beaconsfield', 'High Wycombe', 'Marlow', 'Amersham',
+      'Chesham',
+      // Hertfordshire
+      'Rickmansworth', 'Watford', 'Borehamwood', 'Radlett', 'St Albans',
+      'Hemel Hempstead', 'Berkhamsted', 'Potters Bar', 'Hatfield',
+      'Welwyn Garden City', 'Welwyn',
+    ],
   },
   {
     id: 'east',
@@ -61,7 +76,19 @@ export const coverage = [
     title: 'The South West',
     note: 'Refurbishment and contract work, programmed in blocks so the travel earns its keep. As far west as Plymouth.',
     counties: ['Hampshire', 'Dorset', 'Devon'],
-    places: ['Plymouth'],
+    // Ordered east to west along the route out, ending at Plymouth.
+    places: [
+      // Hampshire
+      'Aldershot', 'Farnborough', 'Fleet', 'Basingstoke', 'Winchester',
+      'Andover', 'Eastleigh', 'Southampton', 'Portsmouth', 'Fareham',
+      'Lymington',
+      // Dorset
+      'Christchurch', 'Bournemouth', 'Poole', 'Wimborne Minster', 'Dorchester',
+      'Weymouth', 'Bridport',
+      // Devon
+      'Honiton', 'Exmouth', 'Exeter', 'Newton Abbot', 'Torquay', 'Paignton',
+      'Totnes', 'Ivybridge', 'Plymouth',
+    ],
   },
 ];
 
