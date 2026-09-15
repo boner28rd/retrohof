@@ -40,7 +40,21 @@ export const coverage = [
     title: 'Kent & Sussex',
     note: 'Planned works, portfolio maintenance and contract clients across the south east.',
     counties: ['Kent', 'East Sussex', 'West Sussex'],
-    places: [],
+    // Principal towns of the three counties, ordered roughly west to east.
+    // Strike any RetroHof does not actually attend — an unserved town on the
+    // list is worse than a short list.
+    places: [
+      // Kent
+      'Sevenoaks', 'Tonbridge', 'Tunbridge Wells', 'Dartford', 'Gravesend',
+      'Rochester', 'Chatham', 'Maidstone', 'Sittingbourne', 'Ashford',
+      'Canterbury', 'Whitstable', 'Folkestone', 'Dover',
+      // West Sussex
+      'Crawley', 'East Grinstead', 'Haywards Heath', 'Burgess Hill', 'Horsham',
+      'Worthing', 'Littlehampton', 'Bognor Regis', 'Chichester',
+      // East Sussex
+      'Brighton & Hove', 'Lewes', 'Newhaven', 'Eastbourne', 'Bexhill-on-Sea',
+      'Hastings',
+    ],
   },
   {
     id: 'southwest',
