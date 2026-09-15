@@ -85,7 +85,7 @@ export default {
   depth: d,
   title: `Who We Work With | ${site.legalName}`,
   description:
-    'RetroHof works with homeowners, landlords, letting and managing agents, businesses and block management companies across Surrey — each with a service shaped around how they actually operate.',
+    'RetroHof works with homeowners, landlords, letting and managing agents, businesses and block management companies across southern England — each with a service shaped around how they actually operate.',
   ogImage: '/assets/img/banner/sectors.jpg',
   breadcrumbs: [{ label: 'Who We Help', href: '/sectors' }],
   body: [

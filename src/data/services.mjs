@@ -15,7 +15,7 @@ export const services = [
     intro:
       'Most property problems are small, awkward and easy to put off — a door that catches, a leaking seal, a shelf that needs hanging properly. RetroHof handles them in a single visit, so a list that has been growing for months is cleared in an afternoon.',
     lead:
-      'Multi-skilled handyman services for homeowners, landlords and managing agents across Surrey.',
+      'Multi-skilled handyman services for homeowners, landlords and managing agents across Surrey and the south east.',
     includes: [
       'Door and window adjustments, locks, handles and closers',
       'Shelving, mirrors, blinds, curtain poles and TV brackets',

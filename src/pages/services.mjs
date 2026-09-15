@@ -12,9 +12,9 @@ const hub = () => {
     url: '/services',
     file: 'services.html',
     depth: d,
-    title: `Property Maintenance Services in Surrey | ${site.legalName}`,
+    title: `Property Maintenance Services | ${site.regionPhraseTitle} | ${site.legalName}`,
     description:
-      'Handyman repairs, painting and decorating, carpentry, roofing, plumbing, electrical work, grounds maintenance, cleaning, refurbishment and 24/7 emergency cover across Surrey.',
+      'Handyman repairs, painting and decorating, carpentry, roofing, plumbing, electrical work, grounds maintenance, cleaning, refurbishment and 24/7 emergency cover across southern England.',
     ogImage: '/assets/img/banner/services.jpg',
     breadcrumbs: [{ label: 'Services', href: '/services' }],
     body: [
@@ -137,8 +137,8 @@ function detail(s) {
     url: `/services/${s.slug}`,
     file: `services/${s.slug}.html`,
     depth: d,
-    title: `${s.title} in Surrey | ${site.legalName}`,
-    description: `${s.lead} Fixed prices, fully insured, 12-month workmanship guarantee. Covering ${site.address.locality} and across ${site.address.region}.`,
+    title: `${s.title} | ${site.regionPhraseTitle} | ${site.legalName}`,
+    description: `${s.lead} Fixed prices, fully insured, 12-month workmanship guarantee. Covering ${site.address.region} and across ${site.regionPhrase}.`,
     ogImage: s.image,
     breadcrumbs: [
       { label: 'Services', href: '/services' },
@@ -160,7 +160,7 @@ function detail(s) {
 <section class="sec">
   <div class="wrap svc-detail">
     <div class="svc-body">
-      <h2>${esc(s.title)} across ${esc(site.address.region)}</h2>
+      <h2>${esc(s.title)} across ${esc(site.regionPhrase)}</h2>
       <p>${esc(s.intro)}</p>
 
       <h2>What this covers</h2>

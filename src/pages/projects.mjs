@@ -51,7 +51,7 @@ export default {
   depth: d,
   title: `Projects & Case Studies | ${site.legalName}`,
   description:
-    'Examples of property maintenance and refurbishment work carried out by RetroHof across Surrey — kitchens, bathrooms, void turnarounds, roofline replacement, communal areas and commercial units.',
+    'Examples of property maintenance and refurbishment work carried out by RetroHof across southern England — kitchens, bathrooms, void turnarounds, roofline replacement, communal areas and commercial units.',
   ogImage: '/assets/img/banner/projects.jpg',
   breadcrumbs: [{ label: 'Projects', href: '/projects' }],
   // Kept out of search results while the case studies below are still

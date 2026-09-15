@@ -148,7 +148,7 @@ function jsonLd(depth, page) {
     '@id': `${site.baseUrl}/#business`,
     name: site.legalName,
     alternateName: site.name,
-    description: 'Professional property maintenance, repairs, decorating and refurbishment across Surrey.',
+    description: `Professional property maintenance, repairs, decorating and refurbishment across ${site.regionPhrase}.`,
     url: site.baseUrl + '/',
     telephone: site.phone.display,
     email: site.email,
@@ -160,7 +160,10 @@ function jsonLd(depth, page) {
       addressRegion: site.address.region,
       addressCountry: site.address.country,
     },
-    areaServed: site.areas.map((a) => ({ '@type': 'City', name: a })),
+    areaServed: [
+      ...site.counties.map((c) => ({ '@type': 'AdministrativeArea', name: c })),
+      ...site.areas.map((a) => ({ '@type': 'City', name: a })),
+    ],
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',

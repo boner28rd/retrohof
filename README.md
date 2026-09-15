@@ -1,7 +1,9 @@
 # RetroHof — retrohof.co.uk
 
 Static marketing site for **RetroHof Ltd**, a multi-trade property maintenance
-company in Hersham, Surrey.
+company based in Hersham, Surrey, working across southern England — north to
+Welwyn, east into Kent, south through Sussex, and west through Hampshire and
+Dorset as far as Devon and Plymouth.
 
 The published site is plain HTML, CSS and a single ~7 KB JavaScript file. There
 is no framework, no bundler and no runtime dependency — any static host will
@@ -24,6 +26,7 @@ These are deliberate gaps, not oversights. Work through them first.
 | 6 | **Have the legal pages reviewed.** The terms, privacy policy and acceptable use policy are an accurate, sensible starting point for a UK maintenance company — they are not legally vetted. | `src/pages/legal.mjs` |
 | 7 | **Add the company number** if RetroHof Ltd is registered; it then appears in the footer. | `src/data/site.mjs` |
 | 8 | **Verify the claims.** Figures in the stat band ("1,200+ jobs a year") and the credentials list (Gas Safe, registered electricians, waste carrier licence, DBS) must be true before publication. | `src/data/content.mjs` |
+| 9 | **Confirm the coverage tiers.** `coverage` lists four regions ordered by distance, with response expectations that differ between them. Towns are named for the Surrey home patch only — add towns to the other regions as you confirm you genuinely work them. Named towns help local search, but only list real ones. | `src/data/site.mjs` |
 
 `node tools/build.mjs` prints a warning listing any placeholder content still
 present.

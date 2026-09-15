@@ -1,11 +1,11 @@
-import { site } from '../data/site.mjs';
+import { site, coverage } from '../data/site.mjs';
 import { services } from '../data/services.mjs';
 import { sectors, testimonials } from '../data/content.mjs';
 import { projects } from '../data/projects.mjs';
 import { icon } from '../icons.mjs';
 import { esc, rel } from '../layout.mjs';
 import {
-  sectionHead, serviceGrid, ctaBand, statBand, processSteps, credentialGrid, areaList,
+  sectionHead, serviceGrid, ctaBand, statBand, processSteps, credentialGrid,
 } from '../components.mjs';
 
 const d = 0;
@@ -13,7 +13,7 @@ const d = 0;
 const slides = [
   {
     img: '/assets/img/hero/hero-1.jpg',
-    eyebrow: 'Surrey property maintenance',
+    eyebrow: 'Property maintenance, southern England',
     title: 'Every trade you need,<br><em>one number to call</em>',
     text: 'Repairs, decorating, roofing, plumbing and full refurbishments — delivered by one team, to a fixed price, with a twelve-month guarantee behind the work.',
   },
@@ -109,7 +109,7 @@ function intro() {
       <p class="eyebrow">Welcome to RetroHof</p>
       <h2 class="sec-head__title">Property maintenance without the chasing</h2>
       <p class="lead">Most property problems are not complicated. They are just tedious to organise — three quotes, two no-shows, and a job that still is not booked a fortnight later.</p>
-      <p>RetroHof exists to remove that. We are a multi-trade property maintenance company based in ${esc(site.address.locality)}, covering ${esc(site.address.region)} and the neighbouring south-west London boroughs. Whether it is a single leaking tap, a full void turnaround before a new tenancy, or a commercial unit being handed back to a landlord, it is the same team, the same standard and the same point of contact.</p>
+      <p>RetroHof exists to remove that. We are a multi-trade property maintenance company based in ${esc(site.address.locality)}, working across ${esc(site.regionPhrase)} — from Hertfordshire in the north to Devon in the south west. Whether it is a single leaking tap, a full void turnaround before a new tenancy, or a commercial unit being handed back to a landlord, it is the same team, the same standard and the same point of contact.</p>
       <ul class="ticks ticks--2">
         <li>Every trade under one roof, so nobody passes the job on</li>
         <li>Written, itemised quotations before anything starts</li>
@@ -204,7 +204,7 @@ function projectsSection() {
   <div class="wrap">
     ${sectionHead({
       eyebrow: 'Recent work',
-      title: 'Projects across Surrey',
+      title: 'Projects across southern England',
       lead: 'A sample of the kind of work we take on — from single-room repairs to whole-property refurbishments.',
     })}
     <div class="proj-grid">
@@ -268,15 +268,18 @@ function areasSection() {
   <div class="wrap cols cols--2 cols--7-5">
     <div>
       <p class="eyebrow">Where we work</p>
-      <h2 class="sec-head__title">Local to ${esc(site.address.locality)}, across ${esc(site.address.region)}</h2>
-      <p class="sec-head__lead">Being genuinely local matters more than it sounds. It means a van can be with you the same morning, and it means we know which streets have which problems.</p>
-      ${areaList(d)}
+      <h2 class="sec-head__title">Local to ${esc(site.address.locality)}, working across ${esc(site.regionPhrase)}</h2>
+      <p class="sec-head__lead">${esc(site.coverageSummary)}</p>
+      <p>Around ${esc(site.address.region)} and south-west London that means same-morning response and a team that knows the housing stock. Further afield it means planned refurbishment and contract work, surveyed properly and programmed in blocks — not a call-out squeezed between local jobs.</p>
+      <ul class="ticks">
+        ${coverage.map((c) => `<li><strong>${esc(c.title)}</strong> — ${esc(c.counties.join(', '))}</li>`).join('')}
+      </ul>
       <div class="actions">
         <a class="btn btn--outline" href="${rel(d, '/areas')}">Check your area</a>
       </div>
     </div>
     <div class="cols__media reveal">
-      <img src="${rel(d, '/assets/img/projects/exterior.jpg')}" alt="Detached Surrey property after exterior maintenance work" width="1200" height="900" loading="lazy">
+      <img src="${rel(d, '/assets/img/projects/exterior.jpg')}" alt="Detached property after exterior maintenance work" width="1200" height="900" loading="lazy">
     </div>
   </div>
 </section>`;
@@ -286,9 +289,9 @@ export default {
   url: '/',
   file: 'index.html',
   depth: 0,
-  title: `Property Maintenance in Surrey | ${site.legalName}`,
+  title: `Property Maintenance | Surrey & Southern England | ${site.legalName}`,
   description:
-    'RetroHof provides multi-trade property maintenance across Surrey — repairs, decorating, roofing, plumbing, electrical work and full refurbishments. Fixed prices, fully insured, 12-month guarantee.',
+    'RetroHof provides multi-trade property maintenance across southern England, from our Surrey base — repairs, decorating, roofing, plumbing, electrical work and full refurbishments. Fixed prices, fully insured, 12-month guarantee.',
   ogImage: '/assets/img/hero/hero-1.jpg',
   body: [
     heroSection(),

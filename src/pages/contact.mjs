@@ -10,7 +10,7 @@ const contactCards = [
   ['phone', 'Call us', `<a href="${site.phone.href}">${site.phone.display}</a>`, 'Fastest for anything urgent'],
   ['mail', 'Email us', `<a href="mailto:${site.email}">${site.email}</a>`, 'Replies within one working day'],
   ['clock', 'Opening hours', `<span>${esc(site.hours)}</span>`, esc(site.emergencyNote)],
-  ['pin', 'Based in', `<span>${esc(site.address.locality)}, ${esc(site.address.region)}</span>`, 'Covering Elmbridge &amp; SW London'],
+  ['pin', 'Based in', `<span>${esc(site.address.locality)}, ${esc(site.address.region)}</span>`, `Covering ${esc(site.regionPhrase)}`],
 ];
 
 function form() {
@@ -100,8 +100,8 @@ export default {
   url: '/contact',
   file: 'contact.html',
   depth: d,
-  title: `Contact RetroHof | Free Quotes Across Surrey`,
-  description: `Contact RetroHof for property maintenance across Surrey. Call ${site.phone.display}, email ${site.email}, or send an enquiry for a free, no-obligation quotation.`,
+  title: `Contact RetroHof | Free Quotes, Surrey & Southern England`,
+  description: `Contact RetroHof for property maintenance across southern England. Call ${site.phone.display}, email ${site.email}, or send an enquiry for a free, no-obligation quotation.`,
   ogImage: '/assets/img/banner/contact.jpg',
   breadcrumbs: [{ label: 'Contact', href: '/contact' }],
   body: [
@@ -168,7 +168,7 @@ export default {
     ${sectionHead({
       eyebrow: 'Coverage',
       title: 'Not sure if we cover you?',
-      lead: 'We work across Elmbridge, north Surrey and the neighbouring south-west London boroughs. If you are on the edge of that, ask &mdash; we will give you a straight answer.',
+      lead: 'We work across southern England &mdash; Surrey and south-west London day to day, and out through Hertfordshire, Kent, Sussex, Hampshire, Dorset and Devon for planned and contract work. If you are not sure, ask &mdash; we will give you a straight answer.',
     })}
     <div class="actions actions--center">
       <a class="btn btn--outline" href="${rel(d, '/areas')}">See the full coverage map</a>

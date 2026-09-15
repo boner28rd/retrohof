@@ -3,6 +3,54 @@
 // updates everywhere (header, footer, contact page, schema.org markup, sitemap).
 // ---------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------
+// Coverage. Ordered by distance from the Hersham base, which is also the
+// honest order for response times — a van can be in Esher this morning; Devon
+// is programmed work, not a call-out.
+//
+// The county lists reflect the stated footprint: north to Welwyn, east into
+// Kent, south through Sussex, and west as far as Dorset, Devon and Plymouth.
+// Town names are given for the home patch only. Add towns to the other regions
+// as you confirm them — named towns are good for local search, but only list
+// places you genuinely work.
+// ---------------------------------------------------------------------------
+export const coverage = [
+  {
+    id: 'surrey',
+    title: 'Surrey & south-west London',
+    note: 'Our home patch. Same or next working day for urgent work, and where most of our scheduled maintenance sits.',
+    counties: ['Surrey', 'Greater London'],
+    places: [
+      'Hersham', 'Walton-on-Thames', 'Weybridge', 'Esher', 'Cobham', 'Oxshott',
+      'Claygate', 'Thames Ditton', 'East Molesey', 'West Molesey', 'Byfleet',
+      'Addlestone', 'Chertsey', 'Shepperton', 'Sunbury-on-Thames', 'Woking',
+      'Guildford', 'Epsom', 'Leatherhead', 'Dorking', 'Kingston upon Thames',
+      'Surbiton', 'Richmond', 'Twickenham', 'Wimbledon',
+    ],
+  },
+  {
+    id: 'north',
+    title: 'North to Hertfordshire',
+    note: 'Up through west London and the M25 corridor, as far north as Welwyn.',
+    counties: ['Middlesex', 'Buckinghamshire', 'Berkshire', 'Hertfordshire'],
+    places: ['Welwyn', 'Welwyn Garden City'],
+  },
+  {
+    id: 'east',
+    title: 'Kent & Sussex',
+    note: 'Planned works, portfolio maintenance and contract clients across the south east.',
+    counties: ['Kent', 'East Sussex', 'West Sussex'],
+    places: [],
+  },
+  {
+    id: 'southwest',
+    title: 'The South West',
+    note: 'Refurbishment and contract work, programmed in blocks so the travel earns its keep. As far west as Plymouth.',
+    counties: ['Hampshire', 'Dorset', 'Devon'],
+    places: ['Plymouth'],
+  },
+];
+
 export const site = {
   name: 'RetroHof',
   legalName: 'RetroHof Ltd',
@@ -29,13 +77,20 @@ export const site = {
     country: 'GB',
   },
 
-  // Primary trading area, used on the home page, areas page and schema.org.
-  areas: [
-    'Hersham', 'Walton-on-Thames', 'Weybridge', 'Esher', 'Cobham',
-    'East Molesey', 'West Molesey', 'Thames Ditton', 'Claygate', 'Oxshott',
-    'Byfleet', 'Addlestone', 'Chertsey', 'Shepperton', 'Sunbury-on-Thames',
-    'Kingston upon Thames', 'Surbiton', 'Epsom', 'Leatherhead', 'Woking',
-  ],
+  // How the trading area is described in body copy and page titles. The
+  // company is based in Surrey but works well beyond it — see `coverage`.
+  regionPhrase: 'southern England',
+  regionPhraseTitle: 'Surrey & Southern England',
+  coverageSummary:
+    'From our base in Hersham we work across the south of England — north to Welwyn, east into Kent, south through Sussex, and west as far as Dorset, Devon and Plymouth.',
+
+  // Derived from `coverage`, used for schema.org areaServed.
+  get areas() {
+    return coverage.flatMap((c) => c.places);
+  },
+  get counties() {
+    return [...new Set(coverage.flatMap((c) => c.counties))];
+  },
 
   // Replace with the company's real social profiles, or leave empty and the
   // icons are simply not rendered. (The old site linked to unrelated brands.)

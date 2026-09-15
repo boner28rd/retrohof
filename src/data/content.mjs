@@ -2,6 +2,8 @@
 // Shared editorial content: FAQs, sectors, process, credentials, testimonials.
 // ---------------------------------------------------------------------------
 
+import { site } from './site.mjs';
+
 export const faqGroups = [
   {
     title: 'Getting a price',
@@ -83,7 +85,7 @@ export const faqGroups = [
     items: [
       [
         'Which areas do you cover?',
-        'We are based in Hersham and work across Elmbridge and the surrounding Surrey and south-west London boroughs. If you are outside the usual radius, ask — we will tell you honestly whether we are the right firm for the job.',
+        'We are based in Hersham in Surrey and work across the south of England — north to Welwyn, east into Kent, south through Sussex, and west through Hampshire and Dorset as far as Devon and Plymouth. Around Surrey and south-west London we cover reactive and scheduled maintenance; further out the work is planned and programmed rather than same-week. If you are not sure, ask — we will tell you honestly whether we are the right firm for the job.',
       ],
       [
         'Do you have a minimum job size?',
@@ -91,7 +93,7 @@ export const faqGroups = [
       ],
       [
         'What are your working hours?',
-        `${'Mon – Sat, 8am – 6pm'} for booked work. Emergency cover for managed properties runs around the clock, including Sundays and bank holidays.`,
+        `${site.hours} for booked work. Emergency cover for managed properties runs around the clock, including Sundays and bank holidays.`,
       ],
     ],
   },
@@ -200,7 +202,8 @@ export const credentials = [
 
 export const stats = [
   ['1,200+', 'jobs completed a year'],
-  ['20+', 'towns covered across Surrey'],
+  // Derived, so it cannot drift out of step with the coverage data.
+  [String(site.counties.length), 'counties across southern England'],
   ['24/7', 'emergency cover for managed properties'],
   ['12 mth', 'guarantee on our workmanship'],
 ];
@@ -227,7 +230,7 @@ export const testimonials = [
   {
     quote:
       'Sample testimonial. If you collect Google or Checkatrade reviews, quote those here and link to the profile so visitors can verify them independently.',
-    attribution: 'Property management company, Elmbridge',
+    attribution: 'Property management company, Kent',
     placeholder: true,
   },
 ];

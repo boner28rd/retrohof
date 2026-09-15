@@ -20,7 +20,7 @@ export default {
   depth: d,
   title: `About RetroHof | Property Maintenance in ${site.address.region}`,
   description:
-    'RetroHof is a multi-trade property maintenance company based in Hersham, Surrey — working for homeowners, landlords, managing agents and businesses across Elmbridge and south-west London.',
+    'RetroHof is a multi-trade property maintenance company based in Hersham, Surrey — working for homeowners, landlords, managing agents and businesses across southern England, from Hertfordshire to Devon.',
   ogImage: '/assets/img/banner/about.jpg',
   breadcrumbs: [{ label: 'About', href: '/about' }],
   body: [
@@ -37,7 +37,8 @@ export default {
     <div>
       <p class="eyebrow">Who we are</p>
       <h2 class="sec-head__title">Every trade, one accountable team</h2>
-      <p class="lead">RetroHof is a property maintenance company based in ${esc(site.address.locality)}, working across ${esc(site.address.region)} and the neighbouring south-west London boroughs.</p>
+      <p class="lead">RetroHof is a property maintenance company based in ${esc(site.address.locality)}, ${esc(site.address.region)}, working across ${esc(site.regionPhrase)}.</p>
+      <p>${esc(site.coverageSummary)}</p>
       <p>We were set up around a simple observation: the hard part of property maintenance is almost never the work itself. It is finding someone who answers the phone, turns up, prices honestly and finishes. Most people have a plumber they trust and nobody else — so every other job becomes a research project.</p>
       <p>We put the trades under one roof so that stops being your problem. A leak, a repaint, a new consumer unit and a garden clearance are one phone call, one quotation and one invoice. For landlords and agents, that difference compounds across a portfolio into genuinely significant time saved.</p>
       <p>We are deliberately not the cheapest. We are insured, certificated, and we come back if something is not right — and over the life of a property that works out considerably cheaper than the alternative.</p>
