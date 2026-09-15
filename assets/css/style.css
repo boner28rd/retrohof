@@ -349,12 +349,23 @@ a.topbar__item:hover { color: #fff; }
 .cols { display: grid; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
 @media (min-width: 900px) {
   .cols--2 { grid-template-columns: 1fr 1fr; }
+  /* `cols--media-first` reorders the media into column 1, so the ratio must be
+     written media-first too: pair it with `cols--5-7` (media 5, text 7), not
+     `cols--7-5` — otherwise the image takes the wide column and the text the
+     narrow one. */
   .cols--media-first > .cols__media { order: -1; }
   .cols--5-7 { grid-template-columns: 5fr 7fr; }
   .cols--7-5 { grid-template-columns: 7fr 5fr; }
 }
+/* Top-align when the text column is much taller than the media, so the image
+   starts level with the heading instead of floating halfway down. */
+.cols--top { align-items: start; }
 .cols__media { position: relative; }
 .cols__media img { width: 100%; border-radius: var(--r-lg); box-shadow: var(--sh-2); }
+/* Taller crop to close the height gap against a long text column. */
+@media (min-width: 900px) {
+  .cols__media--tall img { aspect-ratio: 4 / 5; object-fit: cover; }
+}
 .cols__media--stack { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
 .cols__media--stack img:first-child { grid-column: 1 / -1; aspect-ratio: 16 / 9; object-fit: cover; }
 .cols__media--stack img { aspect-ratio: 4 / 3; object-fit: cover; }

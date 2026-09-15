@@ -6,12 +6,15 @@ import { banner, sectionHead, ctaBand } from '../components.mjs';
 
 const d = 0;
 
+// `headline` is the section heading — keep it short. The longer sentence that
+// used to be the heading now runs as `lead` underneath it, and each section
+// gets one body paragraph rather than two.
 const detail = {
   homeowners: {
-    lead: 'You want the job done once, done well, and you do not want to project-manage it.',
+    headline: 'Done once, done properly',
+    lead: 'You want the job done well, and you do not want to project-manage it.',
     body: [
-      'Most homeowners call us because they have a list rather than a single job — a door that sticks, a tap that drips, a room that has needed painting for two years and a fence panel that came down in February. Individually none of them justifies chasing a specialist. Together they are a day’s work.',
-      'For bigger jobs — a kitchen, a bathroom, an extension made good — we run the whole thing, sequence the trades and keep the house liveable while we do it.',
+      'Most homeowners call us with a list rather than a single job — a door that sticks, a tap that drips, a room that has needed painting for two years. Individually none of them justifies chasing a specialist; together they are a day’s work. For bigger jobs we run the whole thing and keep the house liveable while we do it.',
     ],
     bullets: [
       'Half-day and full-day handyman visits for lists of small jobs',
@@ -22,57 +25,57 @@ const detail = {
     ],
   },
   landlords: {
-    lead: 'Void time is the expensive part. Compliance is the risky part. We deal with both.',
+    headline: 'Less void time, less risk',
+    lead: 'Void time is the expensive part. Compliance is the risky part.',
     body: [
-      'A property standing empty costs you rent every week, and a property that is not compliant costs considerably more than that. We turn voids around to a date rather than an estimate, and we hand over the certificates as a single pack so nothing is missing when the agent asks.',
-      'For portfolio landlords we can hold keys, deal directly with tenants and invoice monthly against agreed rates.',
+      'An empty property costs you rent every week, and one that is not compliant costs considerably more than that. We turn voids around to a date rather than an estimate, and hand over the certificates as a single pack so nothing is missing when the agent asks. For portfolios we can hold keys, deal directly with tenants and invoice monthly against agreed rates.',
     ],
     bullets: [
-      'Void turnarounds to a fixed programme — typically five to ten working days for a one-bedroom flat',
-      'EICR, gas safety, smoke and heat alarm compliance in one visit where possible',
-      'Direct tenant liaison with your authority, so you are not the go-between',
-      'Photographic evidence on completion for deposit and inventory disputes',
-      'Consolidated monthly invoicing across multiple properties',
+      'Void turnarounds to a fixed date, not an estimate',
+      'EICR, gas safety and alarm compliance in one visit',
+      'Direct tenant liaison, so you are not the go-between',
+      'Photographic evidence on completion',
+      'Consolidated monthly invoicing across a portfolio',
     ],
   },
   agents: {
-    lead: 'A contractor should reduce the number of open items on your desk, not add to them.',
+    headline: 'Fewer open items on your desk',
+    lead: 'A contractor should reduce the number of things you are chasing, not add to them.',
     body: [
-      'Works orders are acknowledged the same working day with an expected attendance date. Once a job is booked you do not need to chase it, and when it is complete you get photographs and an invoice that matches the order.',
-      'Every managed property gets a named account contact who knows its history — which matters when the same flat has had three different leaks in two years.',
+      'Works orders are acknowledged the same working day with an expected attendance date, and once a job is booked you do not need to chase it. Every managed property gets a named account contact who knows its history — which matters when the same flat has had three different leaks in two years.',
     ],
     bullets: [
-      'Named account contact and agreed response times by priority',
+      'Named account contact and agreed response times',
       'Works orders acknowledged same working day',
       '24/7 emergency line for managed properties',
-      'Consolidated monthly invoicing with per-property breakdown',
-      'Insurance and registration documentation provided up front',
+      'Monthly invoicing with a per-property breakdown',
+      'Insurance and registration documents up front',
     ],
   },
   businesses: {
-    lead: 'Maintenance that fits around trading hours instead of interrupting them.',
+    headline: 'Work that fits your trading hours',
+    lead: 'Maintenance planned around when you are open, instead of interrupting it.',
     body: [
-      'Commercial clients rarely want work done between nine and five. We plan around your trading pattern — evenings, weekends, or phased so that part of the space stays usable throughout.',
-      'We handle both reactive repairs and planned maintenance programmes, and we can provide method statements and risk assessments as standard for work in occupied premises.',
+      'Commercial clients rarely want work done between nine and five, so we plan around your trading pattern — evenings, weekends, or phased so part of the space stays usable throughout. We handle reactive repairs and planned programmes, with method statements and risk assessments provided as standard for work in occupied premises.',
     ],
     bullets: [
-      'Out-of-hours and weekend working to avoid lost trading',
+      'Evening and weekend working to avoid lost trading',
       'Planned maintenance schedules with annual budgets',
-      'Fit-out, partitioning, decoration and end-of-lease reinstatement',
-      'RAMS, insurance and waste documentation provided as standard',
-      'Single contractor across every trade the premises needs',
+      'Fit-out, partitioning and end-of-lease reinstatement',
+      'RAMS, insurance and waste documentation as standard',
+      'One contractor across every trade the premises needs',
     ],
   },
   blocks: {
+    headline: 'Common parts, properly kept',
     lead: 'Communal areas that residents stop complaining about.',
     body: [
-      'Common parts are judged by everyone who walks through them and paid for by everyone who lives there, which makes them unusually sensitive. We work to a published schedule, post notices before access is needed and phase works so there is always a safe, lit route in and out.',
-      'Cyclical decoration, communal cleaning and grounds maintenance can be quoted annually and split into equal monthly payments for service-charge budgeting.',
+      'Common parts are judged by everyone who walks through them and paid for by everyone who lives there, which makes them unusually sensitive. We work to a published schedule, post notices before access is needed, and phase works so there is always a safe, lit route in and out.',
     ],
     bullets: [
-      'Cyclical redecoration programmes quoted against a written specification',
-      'Communal cleaning and grounds maintenance on a fixed schedule',
-      'Fire door, emergency lighting and handrail remedial works',
+      'Cyclical redecoration against a written specification',
+      'Communal cleaning and grounds on a fixed schedule',
+      'Fire door, emergency lighting and handrail remedials',
       'Resident notices and phased access planning',
       'Annual budgets split into twelve equal payments',
     ],
@@ -125,10 +128,11 @@ export default {
         const flip = i % 2 === 1;
         return `
 <section class="sec${i % 2 === 0 ? ' sec--tint' : ''}" id="${esc(s.slug)}">
-  <div class="wrap cols cols--2 cols--7-5${flip ? ' cols--media-first' : ''}">
+  <div class="wrap cols cols--2 ${flip ? 'cols--5-7 cols--media-first' : 'cols--7-5'} cols--top">
     <div>
       <p class="eyebrow">${esc(s.title)}</p>
-      <h2 class="sec-head__title">${esc(dt.lead)}</h2>
+      <h2 class="sec-head__title">${esc(dt.headline)}</h2>
+      <p class="sec-head__lead">${esc(dt.lead)}</p>
       ${dt.body.map((p) => `<p>${esc(p)}</p>`).join('')}
       <ul class="ticks">${dt.bullets.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>
       <div class="actions">
@@ -136,8 +140,8 @@ export default {
         <a class="btn btn--ghost" href="${rel(d, '/services')}">See services</a>
       </div>
     </div>
-    <div class="cols__media reveal">
-      <img src="${rel(d, s.image)}" alt="${esc(s.title)} — example of RetroHof work" width="1200" height="900" loading="lazy">
+    <div class="cols__media cols__media--tall reveal">
+      <img src="${rel(d, s.image)}" alt="${esc(s.title)} — example of RetroHof work" width="960" height="720" loading="lazy">
     </div>
   </div>
 </section>`;
