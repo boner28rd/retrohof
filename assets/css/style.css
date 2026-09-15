@@ -621,7 +621,11 @@ a.topbar__item:hover { color: #fff; }
 }
 .form-grid { display: grid; gap: 1.1rem; }
 @media (min-width: 640px) { .form-grid--2 { grid-template-columns: 1fr 1fr; } .form-field--full { grid-column: 1 / -1; } }
-.form-field { display: grid; gap: .4rem; }
+/* align-content: start is load-bearing. Fields sit in a grid row and stretch
+   to match their tallest neighbour; without this the auto rows inside a
+   shorter field stretch too, inflating its label and input. A field with no
+   visible hint next to one that has a hint would render a taller box. */
+.form-field { display: grid; gap: .4rem; align-content: start; }
 .form-field label { font: 600 .875rem/1.3 var(--font-body); color: var(--ink); }
 .form-field .hint { font-size: .8125rem; color: var(--muted-2); }
 .req { color: var(--red); }
