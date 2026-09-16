@@ -18,6 +18,13 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "retrohof",
   "compatibility_date": "2026-09-16",
+  // Explicit even though true is the documented default: this project's
+  // dashboard came up with the workers.dev route switched off (no URL to
+  // preview at, "No active routes" in the project list) despite a completed
+  // deploy. Asserting it here means every future `wrangler deploy` actively
+  // re-enables the route rather than leaving it to whatever state the
+  // dashboard happens to be in.
+  "workers_dev": true,
   "assets": {
     "directory": "dist",
     // Serves the nearest 404.html for an unmatched path, matching the custom
