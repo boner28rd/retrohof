@@ -16,7 +16,9 @@
     "check:layout": "node tools/check-layout.mjs",
     "deploy:whatif": "node tools/build.mjs && node tools/deploy.mjs --whatif",
     "deploy": "node tools/build.mjs && node tools/deploy.mjs",
-    "deploy:clean": "node tools/build.mjs && node tools/deploy.mjs --clean"
+    "deploy:clean": "node tools/build.mjs && node tools/deploy.mjs --clean",
+    "stage:cloudflare": "node tools/stage.mjs --host=cloudflare --out=dist",
+    "build:cloudflare": "node tools/build.mjs && node tools/stage.mjs --host=cloudflare --out=dist"
   },
   "license": "UNLICENSED"
 }

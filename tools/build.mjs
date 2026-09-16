@@ -192,9 +192,10 @@ async function main() {
   await write('site.webmanifest', webmanifest());
   await write('.nojekyll', '');
 
-  // IIS config for the retrohof.co.uk host. Harmless on GitHub Pages, which
-  // ignores it, but required on IIS — see the comments inside the file.
-  await write('web.config', await readFile(join(ROOT, 'src', 'web.config'), 'utf8'));
+  // Per-host config. Each host ignores the other's file, so one build serves
+  // IIS (retrohof.co.uk), Cloudflare Pages and GitHub Pages without conflict.
+  await write('web.config', await readFile(join(ROOT, 'src', 'web.config'), 'utf8')); // IIS
+  await write('_headers', await readFile(join(ROOT, 'src', '_headers'), 'utf8')); // Cloudflare
 
   const linkProblems = checkLinks(htmlByFile);
   const imageProblems = await checkImages(htmlByFile);

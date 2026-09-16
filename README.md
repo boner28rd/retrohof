@@ -172,13 +172,50 @@ module turns a `<rewrite>` section into a site-wide HTTP 500. Uncomment,
 upload, and load the site; if you get a 500, re-comment and it recovers
 immediately.
 
-### Other hosts
+### Cloudflare Pages
 
-- **GitHub Pages** — Settings → Pages → deploy from `main`, folder `/ (root)`.
-  A `.nojekyll` file is generated so nothing is filtered out. Currently live
-  at <https://boner28rd.github.io/retrohof/> as a preview.
-- **Netlify / Cloudflare Pages / Vercel** — publish directory `.`, no build
-  command (or `node tools/build.mjs` if you would rather it rebuilt on push).
+Connect the GitHub repo once in the Cloudflare dashboard ("Workers & Pages" →
+Create → Pages → Import an existing Git repository) with these settings:
+
+| Setting | Value |
+|---|---|
+| Framework preset | **None** |
+| Build command | `npm run build:cloudflare` |
+| Build output directory | `dist` |
+| Root directory | `/` |
+
+Nothing to upload afterwards — Cloudflare clones and rebuilds on every push to
+`main`. Node is available on the build image and the build has no
+dependencies, so there is no `npm ci` step to configure.
+
+**Why a build step at all, when the HTML is already committed?** The build
+output lives in the repo root alongside `src/` and `tools/`. Publishing the
+root would put the sources and the IIS `web.config` on the public site.
+`tools/stage.mjs` copies only the site into `dist/`, with the host-specific
+config file for the target — `_headers` for Cloudflare, `web.config` for IIS,
+`.nojekyll` for GitHub Pages — and drops the other two, so neither host serves
+the other's config as a public download.
+
+`src/_headers` carries the caching and security headers, and is the Cloudflare
+counterpart of `src/web.config`. Both are generated into the root by the build.
+
+**Trailing slashes line up.** Cloudflare redirects `/about/index.html` to
+`/about/`, preserving the trailing slash — which is exactly the canonical form
+this site emits, so no `_redirects` rules are needed for it.
+
+**No base path to set.** Every link is relative (`./about/` from the root,
+`../../assets/…` from a service page), so the same build works from a subpath
+host and a root host without reconfiguration. The classic Cloudflare migration
+bug — a stale subpath `base` leaving `<script type="module">` pointing at a
+path that the SPA fallback answers with 200 `text/html` — cannot happen here:
+there are no module scripts and no bundler base setting.
+
+### GitHub Pages
+
+Settings → Pages → deploy from `main`, folder `/ (root)`. A `.nojekyll` file is
+generated so nothing is filtered out. Currently live at
+<https://boner28rd.github.io/retrohof/> as a preview. This one *does* serve
+from a subpath, which the relative links handle.
 
 Set the real domain in `site.baseUrl` (`src/data/site.mjs`) before building —
 it drives the canonical URLs, Open Graph tags, `sitemap.xml` and `robots.txt`.

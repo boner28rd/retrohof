@@ -430,3 +430,6 @@ FodyWeavers.xsd
 
 # Local deploy staging directory (tools/deploy.mjs)
 .deploy/
+
+# Cloudflare Pages build output (tools/stage.mjs)
+dist/

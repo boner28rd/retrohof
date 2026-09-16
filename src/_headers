@@ -1,0 +1,28 @@
+# Cloudflare Pages response headers.
+# Source file: tools/build.mjs copies it to the repo root on every build.
+#
+# This is the Cloudflare counterpart of src/web.config. Cloudflare ignores
+# web.config and IIS ignores this file, so both hosts can be served from the
+# same build without conflicting.
+#
+# Syntax: a URL pattern on its own line, headers indented beneath it. One
+# splat (*) per pattern. Limit is 100 rules, 2,000 chars per line.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Strict-Transport-Security: max-age=31536000
+
+# Photography and logos are replaced by filename, never edited in place,
+# so they can be cached hard.
+/assets/img/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# CSS and JS keep their filenames across edits, so they must revalidate —
+# this is why a stylesheet change needs a hard refresh to show up.
+/assets/css/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/assets/js/*
+  Cache-Control: public, max-age=3600, must-revalidate

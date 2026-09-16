@@ -19,10 +19,10 @@
 // process list while the command runs — the same as any Visual Studio publish.
 // It is not written to disk, not logged, and redacted from error output here.
 // ---------------------------------------------------------------------------
-import { readdir, mkdir, copyFile, rm, stat } from 'node:fs/promises';
-import { join, dirname, relative, sep } from 'node:path';
+import { join } from 'node:path';
 import { spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
+import { stage } from './stage.mjs';
 
 const SITE = 'boner28-003-site5';
 const ENDPOINT = `https://win6046.site4now.net:8172/msdeploy.axd?site=${SITE}`;
@@ -35,42 +35,10 @@ const WHATIF = process.argv.includes('--whatif');
 const CLEAN = process.argv.includes('--clean');
 
 const MSDEPLOY = [
-  'C:\\Program Files\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe',
-  'C:\\Program Files (x86)\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe',
-  'C:\\Program Files\\IIS\\Microsoft Web Deploy V2\\msdeploy.exe',
+  String.raw`C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe`,
+  String.raw`C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe`,
+  String.raw`C:\Program Files\IIS\Microsoft Web Deploy V2\msdeploy.exe`,
 ].find((p) => existsSync(p));
-
-// Build tooling and sources — never published.
-const EXCLUDE_DIRS = new Set(['.git', '.claude', '.deploy', 'src', 'tools', 'node_modules']);
-const EXCLUDE_FILES = new Set(['README.md', 'package.json', 'package-lock.json', '.gitignore', '.nojekyll']);
-
-async function collect(dir = ROOT) {
-  const out = [];
-  for (const e of await readdir(dir, { withFileTypes: true })) {
-    if (e.isDirectory()) {
-      if (EXCLUDE_DIRS.has(e.name)) continue;
-      out.push(...(await collect(join(dir, e.name))));
-    } else if (e.isFile() && !EXCLUDE_FILES.has(e.name)) {
-      out.push(join(dir, e.name));
-    }
-  }
-  return out;
-}
-
-/** Copy the publishable files into .deploy/ so the sync source is exactly the site. */
-async function stageSite() {
-  await rm(STAGE, { recursive: true, force: true });
-  const files = await collect();
-  let bytes = 0;
-  for (const f of files) {
-    const rel = relative(ROOT, f);
-    const dest = join(STAGE, rel);
-    await mkdir(dirname(dest), { recursive: true });
-    await copyFile(f, dest);
-    bytes += (await stat(f)).size;
-  }
-  return { count: files.length, bytes };
-}
 
 function run(exe, args, redact) {
   return new Promise((resolve) => {
@@ -97,7 +65,8 @@ if (!MSDEPLOY) {
   process.exit(1);
 }
 
-const { count, bytes } = await stageSite();
+// IIS payload: includes web.config, excludes _headers and .nojekyll.
+const { count, bytes } = await stage({ host: 'iis', out: '.deploy' });
 console.log(`Staged ${count} files (${(bytes / 1024 / 1024).toFixed(1)} MB) in .deploy/`);
 console.log(`Target  ${ENDPOINT}`);
 console.log(`Site    ${SITE}   user ${USER}`);
