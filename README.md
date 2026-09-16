@@ -179,19 +179,56 @@ the retrohof.co.uk domain at this — it stays on IIS until the client signs
 off on a change, at which point it is published there with
 `npm run deploy` (above), not by moving DNS.
 
-Connect the GitHub repo once in the Cloudflare dashboard ("Workers & Pages" →
-Create → Pages → Import an existing Git repository) with these settings:
+Connect the GitHub repo once in the Cloudflare dashboard. As of when this was
+set up, "Workers & Pages" → Create routes new Git-connected projects through
+the unified **Workers** flow rather than classic Pages, which has different
+fields — build output directory isn't one of them, because the output
+location comes from `wrangler.jsonc` (committed at the repo root) instead:
 
 | Setting | Value |
 |---|---|
 | Framework preset | **None** |
 | Build command | `npm run build:cloudflare` |
-| Build output directory | `dist` |
+| Deploy command | `npx wrangler deploy` (the default — leave as-is) |
 | Root directory | `/` |
 
-Nothing to upload afterwards — Cloudflare clones and rebuilds on every push to
-`main`. Node is available on the build image and the build has no
+Nothing to upload afterwards — Cloudflare clones, builds and deploys on every
+push to `main`. Node is available on the build image and the build has no
 dependencies, so there is no `npm ci` step to configure.
+
+**The first deploy failed, and it's worth knowing why.** With no
+`wrangler.jsonc` in the repo, `wrangler deploy` ran its "no config found"
+setup wizard, which defaulted `assets.directory` to `.` — the whole repo —
+and installed `wrangler` as a devDependency. That swept
+`node_modules/wrangler`'s 125 MiB `workerd` binary into the upload and hit
+Workers' 25 MiB per-file limit:
+
+```
+✘ [ERROR] Asset too large.
+  ...found a file .../node_modules/workerd/bin/workerd with a size of 125 MiB.
+```
+
+The wizard also wanted to add `"deploy": "wrangler deploy"` to
+`package.json` — which would have silently redefined `npm run deploy`, our
+existing **IIS production publish** (`tools/deploy.mjs`), into a Cloudflare
+push. That happened in Cloudflare's disposable build sandbox, not this repo,
+so nothing here was affected — but it is the reason a committed
+`wrangler.jsonc` matters beyond just fixing the asset-size error: its mere
+presence skips the wizard on every future build, so this can't recur.
+
+`wrangler.jsonc` sets `assets.directory: "dist"` (built fresh by the Build
+command above, on every deploy — it's gitignored, not committed),
+`not_found_handling: "404-page"` so the custom `404.html` is served, and
+`html_handling: "auto-trailing-slash"` — the default, set explicitly — so
+`/about/index.html` serves at `/about/` and `/about` redirects to it,
+matching the canonical URLs this site already emits.
+
+**Verify the Build command is actually set.** The failed deploy's log had no
+"Executing user build command" line before "Executing user deploy command" —
+meaning it never ran `npm run build:cloudflare`, and `dist/` never existed.
+Check *Settings → Builds* on the Cloudflare project and confirm the Build
+command field holds `npm run build:cloudflare` before retrying; the wizard's
+own defaults do not fill this in for you.
 
 **Why a build step at all, when the HTML is already committed?** The build
 output lives in the repo root alongside `src/` and `tools/`. Publishing the
@@ -202,11 +239,9 @@ config file for the target — `_headers` for Cloudflare, `web.config` for IIS,
 the other's config as a public download.
 
 `src/_headers` carries the caching and security headers, and is the Cloudflare
-counterpart of `src/web.config`. Both are generated into the root by the build.
-
-**Trailing slashes line up.** Cloudflare redirects `/about/index.html` to
-`/about/`, preserving the trailing slash — which is exactly the canonical form
-this site emits, so no `_redirects` rules are needed for it.
+counterpart of `src/web.config`. Both are generated into the root by the
+build; `_headers` and `_redirects` are read natively from the assets
+directory under this Workers deployment model too, not just classic Pages.
 
 **No base path to set.** Every link is relative (`./about/` from the root,
 `../../assets/…` from a service page), so the same build works from a subpath

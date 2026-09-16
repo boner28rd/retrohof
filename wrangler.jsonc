@@ -1,0 +1,31 @@
+{
+  // Cloudflare Workers static-assets config for the retrohof staging preview.
+  //
+  // This file's existence matters as much as its content: `wrangler deploy`
+  // only runs its interactive "no config found" setup wizard when there is no
+  // wrangler.jsonc/toml in the repo. That wizard is what produced the first
+  // failed deploy — it defaulted assets.directory to "." (the whole repo),
+  // which swept in node_modules/wrangler's 125 MiB workerd binary and blew
+  // the 25 MiB per-file limit. It also wanted to add "deploy": "wrangler
+  // deploy" to package.json, which would silently redefine `npm run deploy`
+  // — currently the IIS production publish (tools/deploy.mjs) — into a
+  // Cloudflare push instead. Committing this file skips that wizard entirely.
+  //
+  // The Cloudflare dashboard's "Build command" must be
+  // `npm run build:cloudflare` (see README.md) so dist/ exists before this
+  // config is read — assets.directory below is relative to this file, i.e.
+  // the repo root, not to the build output.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "retrohof",
+  "compatibility_date": "2026-09-16",
+  "assets": {
+    "directory": "dist",
+    // Serves the nearest 404.html for an unmatched path, matching the custom
+    // 404 page IIS and GitHub Pages both already serve.
+    "not_found_handling": "404-page",
+    // Default value, set explicitly: /about/index.html -> /about/, and
+    // /about redirects to /about/ — the same trailing-slash form the
+    // canonical tags, sitemap and other hosts already use.
+    "html_handling": "auto-trailing-slash"
+  }
+}

@@ -9,7 +9,7 @@ const ROOT = process.cwd();
 async function htmlFiles(dir = ROOT, depth = 0) {
   const out = [];
   for (const e of await readdir(dir, { withFileTypes: true })) {
-    if (e.name.startsWith('.') || ['node_modules', 'src', 'tools', 'assets'].includes(e.name)) continue;
+    if (e.name.startsWith('.') || ['node_modules', 'src', 'tools', 'assets', 'dist'].includes(e.name)) continue;
     const p = join(dir, e.name);
     if (e.isDirectory() && depth < 2) out.push(...(await htmlFiles(p, depth + 1)));
     else if (e.isFile() && e.name.endsWith('.html')) out.push(p);

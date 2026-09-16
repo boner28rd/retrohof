@@ -20,7 +20,12 @@ const ROOT = process.cwd();
 
 // Never published, whatever the host.
 const EXCLUDE_DIRS = new Set(['.git', '.claude', '.deploy', 'dist', 'src', 'tools', 'node_modules']);
-const EXCLUDE_FILES = new Set(['README.md', 'package.json', 'package-lock.json', '.gitignore']);
+const EXCLUDE_FILES = new Set([
+  'README.md', 'package.json', 'package-lock.json', '.gitignore',
+  // Cloudflare's own deploy tooling reads this from the repo root at deploy
+  // time, via -c/--config; it is not something the site itself should serve.
+  'wrangler.jsonc', 'wrangler.toml',
+]);
 
 const HOST_FILES = {
   iis: ['web.config'],
