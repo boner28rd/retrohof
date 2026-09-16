@@ -112,6 +112,13 @@ export const site = {
   hoursShort: 'Mon–Sat 8–6',
   emergencyNote: '24/7 emergency cover for managed properties',
 
+  // Raw facts only — every mention of them in body copy is written by hand
+  // for that page (about.mjs, the footer, the home page intro), not stamped
+  // from one template sentence, so it never reads as the same line pasted
+  // in three places. Deliberately no further biographical detail: this is a
+  // light, evergreen thread, not a "meet the owners" feature.
+  owners: { names: 'Veerle and Gareth', child: 'Johanna' },
+
   // Apex, not www. The existing live site declares
   // <link rel="canonical" href="https://retrohof.co.uk"> and serves both
   // hostnames without redirecting, so the apex is what is already indexed.

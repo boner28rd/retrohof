@@ -109,7 +109,7 @@ function intro() {
       <p class="eyebrow">Welcome to RetroHof</p>
       <h2 class="sec-head__title">Property maintenance without the chasing</h2>
       <p class="lead">Most property problems are not complicated. They are just tedious to organise — three quotes, two no-shows, and a job that still is not booked a fortnight later.</p>
-      <p>RetroHof exists to remove that. We are a multi-trade property maintenance company based in ${esc(site.address.locality)}, working across ${esc(site.regionPhrase)} — from Hertfordshire in the north to Devon in the south west. Whether it is a single leaking tap, a full void turnaround before a new tenancy, or a commercial unit being handed back to a landlord, it is the same team, the same standard and the same point of contact.</p>
+      <p>RetroHof exists to remove that. We are a family-run, multi-trade property maintenance company based in ${esc(site.address.locality)}, working across ${esc(site.regionPhrase)} — from Hertfordshire in the north to Devon in the south west. Whether it is a single leaking tap, a full void turnaround before a new tenancy, or a commercial unit being handed back to a landlord, it is the same team, the same standard and the same point of contact.</p>
       <ul class="ticks ticks--2">
         <li>Every trade under one roof, so nobody passes the job on</li>
         <li>Written, itemised quotations before anything starts</li>

@@ -117,7 +117,7 @@ function footer(depth) {
   <div class="wrap foot__grid">
     <div class="foot__col foot__col--brand">
       <img class="foot__logo" src="${rel(depth, '/assets/img/logo/logo-footer.png')}" alt="${esc(site.legalName)}" width="640" height="145" loading="lazy">
-      <p class="foot__blurb">Property maintenance, repairs and refurbishment for homes, rentals and commercial premises across ${esc(site.address.region)}. One team, one number, work that is guaranteed.</p>
+      <p class="foot__blurb">A family-run property maintenance team — repairs and refurbishment for homes, rentals and commercial premises across ${esc(site.address.region)}. One number, one team, work that is guaranteed.</p>
       <ul class="foot__contact">
         <li><a href="${site.phone.href}">${icon('phone', { size: 18 })}<span>${site.phone.display}</span></a></li>
         <li><a href="mailto:${site.email}">${icon('mail', { size: 18 })}<span>${site.email}</span></a></li>
@@ -156,7 +156,7 @@ function jsonLd(depth, page) {
     '@id': `${site.baseUrl}/#business`,
     name: site.legalName,
     alternateName: site.name,
-    description: `Professional property maintenance, repairs, decorating and refurbishment across ${site.regionPhrase}.`,
+    description: `Family-run property maintenance, repairs, decorating and refurbishment across ${site.regionPhrase}.`,
     url: site.baseUrl + '/',
     telephone: site.phone.display,
     email: site.email,
