@@ -172,7 +172,12 @@ module turns a `<rewrite>` section into a site-wide HTTP 500. Uncomment,
 upload, and load the site; if you get a 500, re-comment and it recovers
 immediately.
 
-### Cloudflare Pages
+### Cloudflare Pages — staging preview, not production
+
+Used to review changes before they go live on retrohof.co.uk. Do **not** point
+the retrohof.co.uk domain at this — it stays on IIS until the client signs
+off on a change, at which point it is published there with
+`npm run deploy` (above), not by moving DNS.
 
 Connect the GitHub repo once in the Cloudflare dashboard ("Workers & Pages" →
 Create → Pages → Import an existing Git repository) with these settings:
